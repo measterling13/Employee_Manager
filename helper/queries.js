@@ -7,3 +7,11 @@ function viewAllDepartments(db, mainMenu) {
         mainMenu();
     });
 }
+
+function viewAllEmployees(db, mainMenu) {
+    let query = `SELECT employee.id, employee.first_name, employee.last_name, role.title, department.department_name, role.salary FROM employee LEFT JOIN role ON employee.role_id = role.id LEFT JOIN department ON role.department_id = department.id`;
+    db.query(query, function (err, res){
+     console.table(res);
+     mainMenu();
+    }); 
+ }
