@@ -23,3 +23,45 @@ db.connect(function (err) {
     if (err) throw err;
     mainMenu();
 });
+
+function mainMenu() {
+    inquirer.prompt({
+        type: "list",
+        name: "mainMenu",
+        message: "What you want to know?",
+        choices: [
+            'View All Departments',
+            'View All Roles',
+            'View All Employees',
+            'Add Department',
+            'Add Role',
+            'Add Employee',
+            'Exit'
+        ]
+    })
+    .then(function(answer) {
+        switch (answer.mainMenu){
+            case 'View All Departments':
+                viewAllDepartments(db, mainMenu);
+                break;
+            case 'View All Roles':
+                veiwAllRoles(db, mainMenu);
+                break;
+            case 'View All Employees':
+                viewAllEmployees(db, mainMenu);
+                break;
+            case 'Add Department':
+                addDepartment(db, mainMenu);
+                break;
+            case 'Add Role':
+                addRole(db, mainMenu);
+                break;
+            case 'Add Employee':
+                addEmployee(db, mainMenu);
+                break;
+            case 'Exit':
+                db.end();
+                break;
+        }
+    });
+}
