@@ -40,3 +40,34 @@ function addDepartment (db, mainMenu) {
         });
     });
 }
+
+function addRole (db, mainMenu) {
+    inquirer.prompt ([
+        {
+            type: 'input',
+            message: 'Enter new title.',
+            name: 'roleTitle'
+        },
+        {
+            type: 'input',
+            message: 'What is the pay for this role?',
+            name: 'roleSalary',
+        },
+        {
+           type: 'input',
+           message: 'What department does this role belong too?',
+           name: 'roleDept' 
+        }
+    ]).then(function (res) {
+        const title = res.roleTitle;
+        const salary = res.roleSalary;
+        const deptID = res.roleDept;
+        const query = `INSERT INTO role (title, salary, department_id) VALUES ("${title}", "${salary}", "${deptID}")`;
+        db.query(query, function( err, res) {
+            if (err) {
+                throw err;
+            }
+            veiwAllRoles(db, mainMenu);
+        });
+    });
+}
