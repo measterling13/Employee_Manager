@@ -23,3 +23,20 @@ function viewAllEmployees(db, mainMenu) {
         mainMenu();
     });
 }
+
+function addDepartment (db, mainMenu) {
+    inquirer.prompt({
+        type: 'input',
+        message: 'What is the new Department?',
+        name: 'newDep'
+    }).then(function (res) {
+        const newDepo = res.newDep;
+        const query = `INSERT INTO department (department_name) VALUES ('${newDepo}')`;
+        db.query(query, function (err, res) {
+            if (err) {
+                throw err
+            }
+            viewAllDepartments(db, mainMenu);
+        });
+    });
+}
