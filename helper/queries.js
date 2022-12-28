@@ -71,3 +71,41 @@ function addRole (db, mainMenu) {
         });
     });
 }
+
+function addEmployee (db, mainMenu) {
+    inquirer.prompt([
+        {
+            type: 'input',
+            message: 'What is the new employees first name?',
+            name: 'employFirstName'
+        },
+        {
+            type: 'input',
+            message: 'What is the new employees last name?',
+            name: 'employLastName'
+        },
+        {
+            type: 'input',
+            message: 'What is the role id for this employee?',
+            name: 'employRole'
+        },
+        {
+            type: 'input',
+            message: 'What is the Managers ID for this employee?',
+            name: 'employManager'
+        }
+    ]).then(function (res) {
+        const firstName = res.employFirstName;
+        const lastName = res.employLastName;
+        const newEmployRole = res.employRole;
+        const newEmployManager = res.employManager;
+        const query = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ("${firstName}", "${lastName}", "${newEmployRole}", "${newEmployManager? newEmployManager : -1}")`;
+
+        db.query(query, function( err, res) {
+            if (err) {
+                throw err;
+            }
+            viewAllEmployees(db, mainMenu);
+        });
+    });
+}
