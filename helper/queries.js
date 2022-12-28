@@ -15,3 +15,11 @@ function viewAllEmployees(db, mainMenu) {
      mainMenu();
     }); 
  }
+
+ function veiwAllRoles(db, mainMenu) {
+    let query = `SELECT * FROM role`;
+    db.query(query, function (err, res) {
+        console.table(res);
+        mainMenu();
+    });
+}
