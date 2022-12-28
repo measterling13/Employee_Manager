@@ -3,7 +3,7 @@ const express = require('express');
 const mysql2 = require('mysql2');
 require('dotenv').config();
 
-
+const {addDepartment, addEmployee, addRole, viewAllDepartments, viewAllEmployees, veiwAllRoles} = require('./helper/queries');
 
 const app = express();
 
