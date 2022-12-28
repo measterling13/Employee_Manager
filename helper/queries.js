@@ -109,3 +109,5 @@ function addEmployee (db, mainMenu) {
         });
     });
 }
+
+module.exports = {addDepartment, addEmployee, addRole, viewAllDepartments, viewAllEmployees, veiwAllRoles}
